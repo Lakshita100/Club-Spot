@@ -1,59 +1,296 @@
-<<<<<<< HEAD
-# === Maven / Java ===
-target/
-*.class
-*.jar
-*.war
+# ========================================
+# General / Global Ignores
+# ========================================
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+
+# Linux
+*~
+
+# Editor/IDE Temp Files
+*.swp
+*.swo
+*~
+.vscode/settings.json  # Local VS Code settings (keep .vscode/ for shared)
+.idea/workspace.xml    # IntelliJ workspace (keep .idea/ for shared configs)
+.idea/tasks.xml
+.idea/dictionaries
+.idea/shelf
+.idea/contentModel.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/assetWizardSettings.xml
+.idea/gradle.xml
+.idea/libraries
+.idea/modules.xml  # If not shared
+.idea/misc.xml     # If not shared
+.idea/vcs.xml      # If not shared
+.idea/webResources.xml
+.idea/compiler.xml
+.idea/junit.xml
+.idea/encodings.xml
+.idea/runConfigurations
+*.iml  # IntelliJ module files
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+target/classes/  # Eclipse build output
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Logs
 *.log
-*.iml
-.idea/
-.vscode/
-.mvn/
-mvnw*
-*.iws
-*.ipr
-
-# Spring Boot configs
-application.properties
-application.yml
-application-local.properties
-
-# === React ===
-node_modules/
-build/
-dist/
-.env
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+pms-debug.log*
+*.npmrc  # Local npm config
 
-# === OS / Misc ===
-.DS_Store
-Thumbs.db
-logs/
-temp/
-=======
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Runtime Data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Coverage Directory
+coverage/
+.nyc_output
+.coverage
+*.lcov
 
-# testing
-/coverage
+# Dependency Directories
+node_modules/
+jspm_packages/
 
-# production
-/build
+# Optional npm cache directory
+.npm
 
-# misc
-.DS_Store
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
->>>>>>> 8295d3d368658a335772ecd9cb64c8272bd50941
+# Parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# VS Code
+.vscode/extensions.json  # If not shared
+
+# ========================================
+# Backend: Java / Spring Boot / Maven
+# ========================================
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle (if used alongside Maven)
+.gradle/
+build/
+!**/src/main/**/build/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# IntelliJ
+out/
+
+# Eclipse
+bin/
+
+# Spring Boot
+spring-boot-devtools/
+src/main/resources/application-*.properties  # Local overrides (keep shared ones)
+src/main/resources/application.properties.bak
+
+# Database (local dumps/backups)
+*.sql.dump
+*.backup.sql
+db/
+
+# ========================================
+# Frontend: React / Node.js / npm/yarn
+# ========================================
+
+# See https://github.com/github/gitignore/blob/main/Node.gitignore
+# and https://github.com/github/gitignore/blob/main/React.gitignore
+
+# Dependencies
+**/node_modules/
+**/bower_components/
+
+# Production builds
+**/build/
+**/dist/
+**/build-prod/
+**/release/
+
+# Vite (if using Vite)
+.vite/
+
+# Create React App (if using CRA)
+build/
+
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# pnpm
+.pnpm-store/
+pnpm-lock.yaml  # Or keep if you want lockfile
+
+# Lockfiles (optional: remove if you commit them)
+package-lock.json  # npm
+yarn.lock          # yarn
+pnpm-lock.yaml     # pnpm
+
+# Testing
+/coverage
+/jest
+/__tests__/
+
+# Storybook
+.stories/
+.storybook/out
+
+# TypeScript
+*.tsbuildinfo
+
+# Next.js (if extended later)
+.next/
+out/
+
+# ========================================
+# Docker (if using for deployment)
+# ========================================
+
+# Docker
+.dockerignore
+Dockerfile.*  # Local variants
+.gitpod.yml  # Gitpod config
+
+# Docker CI
+Dockerfile.*.prod
+Dockerfile.*.stage
+Dockerfile.*.dev
+
+# ========================================
+# Database / Local Dev Tools
+# ========================================
+
+# MySQL / Local DB Dumps
+*.sql
+*.backup
+mysql-dump.sql
+clubspot_db.sql  # Local schema dumps
+
+# Local Environment
+.env.*.local
+secrets/
+keystore/
+
+# ========================================
+# Other Tools
+# ========================================
+
+# Postman (API testing)
+*.postman_collection.json
+*.postman_environment.json
+
+# Thunder Client (VS Code)
+thunder-code-collections/
+
+# ========================================
+# Project-Specific (ClubSpot)
+# ========================================
+
+# Backend-specific
+backend/target/
+backend/*.log
+backend/application.properties.local
+backend/src/main/resources/static/build/  # If serving frontend build
+
+# Frontend-specific
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+frontend/coverage/
+
+# Monorepo tools (if using Lerna/Nx)
+lerna-debug.log
+.nyc_output

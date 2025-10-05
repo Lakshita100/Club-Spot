@@ -1,311 +1,272 @@
-<<<<<<< HEAD
-# 🏫 ClubSpot – College Club Management System  
+# ClubSpot: Full-Stack College Club Management System
 
-### 🚀 Full-Stack Web Application built with **React.js**, **Spring Boot 4.6.10 (Java 21)**, and **MySQL**
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.0-green)](https://spring.io/projects/spring-boot) 
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/) 
+[![Java](https://img.shields.io/badge/Java-21-blue)](https://openjdk.org/) 
+[![MySQL](https://img.shields.io/badge/MySQL-8%2B-orange)](https://www.mysql.com/) 
 
----
+## Overview
 
-## 📖 Overview
-**ClubSpot** is a web application designed for colleges to manage student clubs, events, and memberships.  
-It provides two interfaces:
-- 👩‍🎓 **Students:** register, browse clubs, and join.
-- 🧑‍💼 **Admins:** create clubs, manage members, and view activities.
+ClubSpot is a **full-stack web application** for managing college clubs, events, and AICTE (All India Council for Technical Education) compliance. The **backend** (Spring Boot) provides a secure REST API for data handling, authentication, and business logic. The **frontend** (React) offers an intuitive UI for users (admins/members) to browse clubs, register for events, track attendances, and view AICTE hours.
 
----
+**Core Functionality**:
+- Admins: Manage users, clubs, events.
+- Members: View/join events, register attendance, track personal AICTE credits.
+- AICTE Focus: Categorize events (e.g., TECHNICAL workshops), auto-accumulate hours on attendance.
 
-## 🧩 Tech Stack
+This monorepo structure includes both backend and frontend for easy development. Deploy as separate services or bundled (e.g., via Docker).
 
-| Layer | Technology |
-|-------|-------------|
-| **Frontend** | React.js (Axios, React Router, Tailwind CSS / Bootstrap) |
-| **Backend** | Java 21 — Spring Boot 4.6.10 (Maven) |
-| **Database** | MySQL 8 (Workbench) |
-| **API Format** | REST (JSON) |
-| **Build Tools** | npm & Maven |
-| **Version Control** | Git + GitHub |
-
----
-
-## 📁 Project Structure
-
-ClubSpot/
-│
-├── club-spot-frontend/ # React frontend
-│ ├── src/
-│ ├── package.json
-│ └── ...
-│
-├── club-spot-backend/ # Spring Boot backend (Maven)
-│ ├── src/main/java/com/clubspot/
-│ │ ├── controller/
-│ │ ├── entity/
-│ │ ├── repository/
-│ │ ├── security/
-│ │ ├── config/
-│ │ ├── service/
-│ │ └── ClubSpotBackendApplication.java
-│ ├── src/main/resources/application.properties
-│ ├── pom.xml
-│ └── ...
-│
-├── club-spot-database/ # SQL schema and seed data
-│ └── schema.sql
-│
-└── README.md
-
-
----
-
-## ⚙️ Setup Instructions
-
-### 🧰 Prerequisites
-Ensure you have the following installed:
-- **Java 21 (JDK 21 LTS)**
-- **Maven 3.9+**
-- **Node.js 18+ / npm**
-- **MySQL 8+** (Workbench)
-- **Git**
-
----
-
-## 🗄️ Step 1 – Database Setup
-
-Run the following SQL script in **MySQL Workbench**:
-
-```sql
-CREATE DATABASE clubspot;
-
-USE clubspot;
-
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100) UNIQUE,
-    password VARCHAR(255)
-);
-
-CREATE TABLE clubs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    description TEXT
-);
-
-CREATE TABLE memberships (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    club_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (club_id) REFERENCES clubs(id)
-);
-
-⚙️ Step 2 – Backend Setup (Spring Boot 4.6.10 + Java 21)
-
-Navigate to the backend folder:
-> cd club-spot-backend
-
-Update your database credentials in
-src/main/resources/application.properties:
-
-spring.application.name=clubspot
-server.port=8080
-
-spring.datasource.url=jdbc:mysql://localhost:3306/clubspot
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-
-
-## Run the backend:
-> mvn spring-boot:run
-
-The backend will start at
-👉 http://localhost:8080
-
-
-💻 Step 3 – Frontend Setup (React JS)
-
-Open a new terminal:
-> cd club-spot-frontend
-
-
-## Install dependencies:
-> npm install
-
-## Start the frontend:
-> npm start
-
-React will start on
-👉 http://localhost:3000
-
-
-🔗 Step 4 – Connecting React and Spring Boot
-
-Use Axios in React to call backend APIs:
-
-import axios from "axios";
-
-axios.post("http://localhost:8080/api/users/login", {
-  email,
-  password,
-})
-.then(res => console.log(res.data))
-.catch(err => console.error(err));
-
-🧠 Example REST API Endpoints
-Method	Endpoint	Description
-POST	/api/users/register	Register a new user
-POST	/api/users/login	Login existing user
-GET	/api/clubs	Get all clubs
-POST	/api/clubs/join	Join a club
-
-
-🧱 Step 5 – Commit and Push Entire Project to GitHub
-
-From the root folder (ClubSpot/):
-
-git init
-git add .
-git commit -m "Initial commit – React + Spring Boot 4.6.10 (Java 21) + MySQL"
-git branch -M main
-git remote add origin https://github.com/<your-username>/ClubSpot.git
-git push -u origin main
-
-🚀 Future Enhancements
-
-🔐 JWT Authentication (Spring Security)
-🧑‍💼 Admin Dashboard with Role Management
-🗓️ Event Scheduling & Notifications
-☁️ Dockerized Deployment (AWS / Render / Railway)
-🧑‍💻 Author
-
-Lakshita Jain
-💼 Full-Stack Developer (React + Spring Boot 4.6.10 + Java 21 + MySQL)
-🌐 GitHub @Lakshita100
-
-⚙️ Recommended JDK
-
-Verify Java 21 is active:
-> java -version
-
-Expected output:
-> openjdk version "21"
-=======
-# Club Spot - College Club Management Website
-
-A modern, responsive web application for managing college clubs, events, and student activities. Built with React, TypeScript, and Tailwind CSS v4.
+**Demo**: [Live Preview](https://clubspot.example.com) (placeholder; host on Vercel/Netlify for frontend, Heroku for backend).
 
 ## Features
 
-- **Landing Page**: Welcome section with mission/vision and call-to-action buttons
-- **Authentication**: Dual login system for students and administrators
-- **User Dashboard**: Personalized dashboard with AICTE hours tracking and event statistics
-- **Clubs Management**: Browse, join, and manage club memberships
-- **Events System**: Discover events, register, and track attendance
-- **Admin Panel**: Comprehensive management tools for administrators
-- **Responsive Design**: Mobile-friendly interface with modern UI components
+### Backend Features
+- **Authentication**: JWT-based login/register (roles: ADMIN/MEMBER).
+- **Club Management**: CRUD operations with images/certificates.
+- **Event Management**: Schedule events with status (UPCOMING/ONGOING/COMPLETED/CANCELLED), AICTE categories/types, capacity limits.
+- **Attendance Tracking**: Register/confirm attendance; auto-update user AICTE hours.
+- **Queries**: Filter by club, date, status, search; stats (total hours, counts).
+- **Security**: Role-based access, input validation, CORS.
+
+### Frontend Features
+- **Dashboard**: Personalized view (upcoming events, AICTE progress).
+- **Club/Event Browsing**: Search, filter, details with maps/images.
+- **User   Profile**: View/edit profile, attendance history, AICTE certificate download.
+- **Responsive UI**: Mobile-friendly (Bootstrap/Tailwind); dark mode toggle.
+- **Real-Time**: Event status updates (via polling or WebSockets if extended).
+- **Forms**: Secure login/register, event creation/attendance with validation.
+- **Charts**: Visualize AICTE hours/events (Chart.js).
 
 ## Tech Stack
 
-- **Frontend**: React 18 with TypeScript
-- **Styling**: Tailwind CSS v4 (Alpha)
-- **UI Components**: Radix UI primitives with shadcn/ui
-- **Icons**: Lucide React
-- **Build Tool**: Create React App
+### Backend
+- **Framework**: Spring Boot 3.4.0 (Web, Data JPA, Security, Validation).
+- **Database**: MySQL 8+ (HikariCP pool; Hibernate ORM).
+- **Security**: Spring Security + JWT.
+- **Build**: Maven 3.9+.
+- **Language**: Java 21.
+- **Other**: Lombok, Jackson (JSON), SLF4J (logging).
 
-## Getting Started
+### Frontend
+- **Framework**: React 18 (with Hooks/Context for state).
+- **UI Library**: Bootstrap 5 or Tailwind CSS (responsive components).
+- **HTTP Client**: Axios (API calls with interceptors for JWT).
+- **State Management**: React Context (or Redux for complex apps).
+- **Routing**: React Router v6.
+- **Charts**: Chart.js (AICTE stats).
+- **Forms**: React Hook Form + Yup (validation).
+- **Build**: Vite (fast dev server) or Create React App.
+- **Testing**: Jest + React Testing Library.
+- **Other**: Axios, React Icons, Date-fns (dates).
 
-### Prerequisites
+### Full-Stack Integration
+- **API Communication**: Frontend calls backend at `/api/*` (CORS enabled).
+- **Deployment**: Backend (Heroku/Railway), Frontend (Vercel/Netlify), DB (PlanetScale/MySQL Cloud).
 
-- Node.js (v16 or higher)
-- npm or yarn
+## Prerequisites
 
-### Installation
+### Backend
+- **Java 21**: [OpenJDK](https://openjdk.org/) or [Oracle](https://www.oracle.com/java/technologies/downloads/).
+- **Maven 3.9+**: [Download](https://maven.apache.org/install.html).
+- **MySQL 8+**: [Download](https://dev.mysql.com/downloads/mysql/) (Server + Workbench).
+  - Create DB/user: `CREATE DATABASE clubspot_db; CREATE USER 'clubspot'@'localhost' IDENTIFIED BY 'clubspotpass'; GRANT ALL ON clubspot_db.* TO 'clubspot'@'localhost';`
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd club-spot
-```
+### Frontend
+- **Node.js 18+**: [Download](https://nodejs.org/) (includes npm).
+- **npm/yarn**: For package management.
+- **IDE**: VS Code (with extensions: ES7 React/Redux, Prettier).
 
-2. Install dependencies:
-```bash
-npm install
-```
+### General
+- **Git**: For version control.
+- **API Client**: Thunder Client (VS Code) or Postman for backend testing.
+- **Browser**: Chrome/Firefox (DevTools for debugging).
 
-3. Start the development server:
-```bash
-npm start
-```
+## Quick Start
 
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## Project Structure
-
-```
-club-spot/
-├── public/
-│   ├── index.html
-│   └── manifest.json
-├── src/
-│   ├── index.tsx
-│   └── index.css
-├── components/
-│   ├── ui/              # shadcn/ui components
-│   ├── figma/           # Custom utility components
-│   ├── LandingPage.tsx
-│   ├── AuthPage.tsx
-│   ├── UserDashboard.tsx
-│   ├── ClubsPage.tsx
-│   ├── EventsPage.tsx
-│   └── AdminDashboard.tsx
-├── styles/
-│   └── globals.css      # Global styles and Tailwind configuration
-├── App.tsx              # Main application component
-└── package.json
-```
-
-## Available Scripts
-
-- `npm start` - Runs the app in development mode
-- `npm test` - Launches the test runner
-- `npm run build` - Builds the app for production
-- `npm run eject` - Ejects from Create React App (one-way operation)
-
-## Usage
-
-### For Students:
-1. Sign up or login with student credentials
-2. Browse available clubs and join interesting ones
-3. Discover and register for events
-4. Track AICTE hours and certificates
-5. View personalized dashboard with activity stats
-
-### For Administrators:
-1. Login with admin credentials
-2. Manage club memberships and events
-3. Create new events and track participation
-4. View analytics and generate reports
-5. Oversee multiple clubs from a unified dashboard
-
-## Design System
-
-The application uses a consistent design system with:
-- **Colors**: Blue (#2563eb) primary, Green (#22c55e) secondary
-- **Typography**: Inter/Poppins font family
-- **Components**: Rounded buttons, soft shadows, clean cards
-- **Icons**: Lucide React icon library
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### 1. Clone & Setup
+> git clone https://github.com/Lakshita100/Club-Spot.git
+> cd club-spot
 
 
->>>>>>> 8295d3d368658a335772ecd9cb64c8272bd50941
+### 2. Backend Setup
+1. **DB Init**:
+   - Start MySQL; run `backend/src/main/resources/schema.sql` in Workbench.
+2. **Config** (`backend/src/main/resources/application.properties`)
+3. **Run**:
+   cd backend 
+   mvn clean install 
+   mvn spring-boot:run # http://localhost:8080
+
+- Test: POST `/api/auth/login` → `{"username":"admin1","password":"password"}`.
+
+### 3. Frontend Setup
+1. **Install Deps**:
+   cd frontend 
+   npm install # Or yarn install
+2. **Env Config** (`.env` file):
+   REACT_APP_API_URL=http://localhost:8080/api
+3. **Run**:
+   npm start # http://localhost:3000
+
+- Auto-opens browser; proxies API calls to backend.
+
+### 4. Full Test
+- Frontend: Login (admin1/password) → Dashboard shows events.
+- Backend Logs: Watch for API calls (e.g., GET /events).
+
+## Detailed Setup
+
+### Backend (See Previous README Sections)
+- **Structure**: `backend/src/main/java/com/clubspot/` (entities, services, controllers).
+- **Schema.sql**: Initializes tables (users, clubs, events, attendances, memberships) with sample data.
+- **Security**: JWT in headers; protect routes in controllers.
+- **CORS**: Add `@CrossOrigin(origins = "http://localhost:3000")` for frontend.
+
+- **Key Files**:
+- **App.js**: `<BrowserRouter><Routes><Route path="/" element={<Dashboard />} /></Routes></BrowserRouter>`.
+- **services/authService.js**:
+  ```js
+  import axios from 'axios';
+  const API_URL = process.env.REACT_APP_API_URL;
+  export const login = async (credentials) => {
+    const { data } = await axios.post(`${API_URL}/auth/login`, credentials);
+    localStorage.setItem('token', data.token);
+    return data;
+  };
+  ```
+- **context/AuthContext.js**: Provides user/token; use in components (e.g., `useAuth()` hook).
+- **pages/Events.js**: Fetches `/api/events/upcoming/1` → Displays cards with RSVP button.
+- **Validation**: Use Yup schemas in forms (e.g., event creation).
+- **State Management**: Context for auth/events; Redux if scaling (e.g., global cart for attendances).
+- **Styling**: Bootstrap classes or Tailwind (e.g., `className="card event-card"`).
+- **Error Handling**: Axios interceptors for 401 (redirect to login); toasts (react-toastify).
+- **Responsive**: Use Bootstrap grid; media queries for mobile.
+
+- **Build for Prod**:
+  npm run build # Creates /build folder
+
+- Serve via backend (add to static resources) or separately.
+
+## API Documentation
+
+(Backend-focused; Frontend consumes these.)
+
+Base: `http://localhost:8080/api`
+
+- **Auth**: POST `/auth/login`, `/auth/register`.
+- **Events**: GET/POST `/events`, `/events/upcoming/{clubId}`, `/events/search?query=...`.
+- **Clubs**: GET/POST `/clubs`.
+- **Attendances**: POST `/attendances/{eventId}`, GET `/attendances/user/{userId}`.
+- **Users**: GET/PUT `/users/{id}`.
+
+**Frontend Integration Example** (in EventList.js):
+```js
+import { useEffect, useState } from 'react';
+import { getUpcomingEvents } from '../services/eventService';
+
+const EventList = () => {
+const [events, setEvents] = useState([]);
+useEffect(() => {
+  getUpcomingEvents(1).then(setEvents);  // Calls /api/events/upcoming/1
+}, []);
+return (
+  <div className="row">
+    {events.map(event => <EventCard key={event.id} event={event} />)}
+  </div>
+);
+};
+
+Testing
+Backend
+Unit/Integration: mvn test (JUnit for services/repos; MockMvc for controllers).
+API: Thunder Client collection (login → events → attendance).
+Frontend
+Unit: npm test (Jest: Test components, e.g., render(<LoginForm />);).
+E2E: Cypress (install: npm i cypress → npx cypress open): Simulate login, event RSVP.
+Manual: Run both servers; test flows (register → create event → attend).
+Deployment
+Backend
+Heroku/Railway: Push code; set env vars (DB URL, JWT secret).
+Docker:
+dockerfile
+
+Run
+Copy code
+# backend/Dockerfile
+FROM openjdk:21-jdk-slim
+COPY target/club-spot-backend-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+Build: docker build -t clubspot-backend .
+Run: docker run -p 8080:8080 --env-file .env clubspot-backend.
+DB: Use RDS (AWS) or PlanetScale (MySQL-compatible).
+Frontend
+Vercel/Netlify: npm run build → Deploy /build (auto-detects React).
+Docker:
+dockerfile
+
+Run
+Copy code
+# frontend/Dockerfile
+FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+Run: docker run -p 3000:80 clubspot-frontend.
+Full-Stack
+Monorepo Deploy: Use Docker Compose (backend + frontend + MySQL).
+yaml
+
+Run
+Copy code
+# docker-compose.yml
+services:
+  backend:
+    build: ./backend
+    ports: ["8080:8080"]
+    depends_on: [db]
+  frontend:
+    build: ./frontend
+    ports: ["3000:80"]
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: clubspot_db
+    ports: ["3306:3306"]
+Run: docker-compose up.
+CI/CD: GitHub Actions (build/test/deploy to Vercel/Heroku).
+Troubleshooting
+Backend
+Zero-Dates/ FK Errors: Run updated schema.sql; drop/recreate DB.
+Port Conflicts: Change server.port=8081.
+JWT Issues: Check token expiry; verify SecurityConfig.
+Frontend
+CORS Errors: Ensure backend @CrossOrigin("http://localhost:3000").
+API 404/500: Check REACT_APP_API_URL; backend running?
+Build Fails: npm install again; clear cache (npm start -- --reset-cache).
+State Not Updating: Use useEffect deps; console.log API responses.
+Mobile Issues: Test in Chrome DevTools (device mode).
+General
+Logs: Backend (console); Frontend (browser console).
+Clean: Backend (mvn clean); Frontend (rm -rf node_modules; npm install).
+Versions Mismatch: Align Node/Java (e.g., no ES6+ in backend if needed).
+If issues, share logs/screenshots (e.g., from browser network tab).
+
+Contributing
+Fork repo.
+Branch: git checkout -b feature/event-search.
+Commit: git commit -m "Add event search frontend".
+Push/PR: Test both backend/frontend.
+Suggestions: Add WebSockets for live updates, file uploads for event images, or mobile app (React Native).
+
+
+
+
+
+
